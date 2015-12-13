@@ -1,4 +1,4 @@
-plot3 <- function () {
+plot4 <- function () {
 print("Checking if household_power_consumption.txt file exists................... [household_power_consumption.txt]");
 if (!file.exists('household_power_consumption.txt')) {
   print("The household_power_consumption.txt file was not found!");
@@ -54,13 +54,29 @@ for (i in 2:length(days)) {
 nrowdays <- c(nrowdays, nrow(household));
 
 ## Plotting
-print("Starting plot............................................................. [plot3.png]");
-png("plot3.png", width=480, height=480);
+print("Starting plot............................................................. [plot4.png]");
+png("plot4.png");
+par(mfrow=c(2,2), mar=c(4,4,2,1),oma=c(0,0,2,0));
+
+## SUBPLOT1
+plot.default(household$Global_active_power, type='l', xaxt='n', xlab = "", ylab = "Global Active power (kilowatts)");
+axis(1, at=nrowdays, labels=weekday);
+
+## SUBPLOT2
+plot.default(household$Voltage, type='l', xaxt='n', xlab = "datetime", ylab = "Voltage");
+axis(1, at=nrowdays, labels=weekday);
+
+## SUBPLOT3
 plot(household$Sub_metering_1, col="black", ylab="Energy sub metering", xlab="", type='l', xaxt='n');
 lines(household$Sub_metering_2, col="red");
 lines(household$Sub_metering_3, col="blue");
 axis(1, at=nrowdays, labels=weekday);
-legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("black", "red", "blue"), cex=0.7, lty=1, lwd=1, y.intersp = 0.9, text.width=c(550));
+legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("black", "red", "blue"), cex=0.7, lty=1, lwd=1, y.intersp = 0.9, text.width=c(1000));
+
+## SUBPLOT4
+plot.default(household$Global_reactive_power, type='l', xaxt='n', xlab = "datetime", ylab = "Global_reactive_power");
+axis(1, at=nrowdays, labels=weekday);
+
 dev.off();
 print(".......................................................................... [Done!]");
 }

@@ -14,6 +14,10 @@ In R:
 >source("plot3.R")
 >plot3()
 
+4) For plot4:
+>source("plot4.R")
+>plot4()
+
 But the R files and the zip or txt file with the database in your work directory.
 
 
